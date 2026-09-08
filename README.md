@@ -74,6 +74,23 @@ Discord OAuth.
 
    Open [http://localhost:3000](http://localhost:3000) — click "Sign in" and enter any username.
 
+### Switch API development
+
+The initial REST surface is available under `/api/v1` and every request
+requires `Authorization: Bearer <token>`. Local development uses the dummy
+token `smash-ladder-local-development-token` from `.env.development`:
+
+```bash
+curl -H 'Authorization: Bearer smash-ladder-local-development-token' \
+  http://localhost:3000/api/v1/health
+curl -H 'Authorization: Bearer smash-ladder-local-development-token' \
+  http://localhost:3000/api/v1/config
+```
+
+Production does not fall back to the dummy token. Set
+`SMASH_LADDER_API_TOKEN` explicitly until per-user API tokens replace this
+temporary shared-token guard.
+
 The checked-in `.env.development` file has everything pre-configured for this local setup. If
 you want to use a remote database or real Discord OAuth instead, copy `.env.example` to `.env`
 and fill in the values.
